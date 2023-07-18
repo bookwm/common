@@ -118,7 +118,7 @@ COOLSNOWWOLF)
   export SOURCE="Lede"
   export SOURCE_OWNER="Lean's"
   if [[ "${REPO_BRANCH}" == "master" ]]; then
-    export REPO_URL="https://github.com/coolsnowwolf/lede"
+    export REPO_URL="https://github.com/OpenWrtLi/lede"
     export LUCI_EDITION="18.06"
     export DIY_WORK="${FOLDER_NAME}master"
     echo "GL_BRANCH=lede" >> ${GITHUB_ENV}
@@ -129,7 +129,7 @@ COOLSNOWWOLF)
     export DIY_WORK="${FOLDER_NAME}ax1800"
     echo "GL_BRANCH=lede_ax1800" >> ${GITHUB_ENV}
   else
-    export REPO_URL="https://github.com/coolsnowwolf/lede"
+    export REPO_URL="https://github.com/OpenWrtLi/lede"
     export LUCI_EDITION="$(echo "${REPO_BRANCH}" |sed 's/openwrt-//g')"
     export DIY_WORK="${FOLDER_NAME}$(echo "${LUCI_EDITION}" |sed "s/\.//g" |sed "s/\-//g")"
     echo "GL_BRANCH=lede" >> ${GITHUB_ENV}

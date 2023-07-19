@@ -299,8 +299,12 @@ COOLSNOWWOLF)
     find . -type d -name "${i}" |grep -v 'danshui' |xargs -i rm -rf {}; \
   done
   if [[ "${GL_BRANCH}" == "lede" ]]; then
-    find . -type d -name "upx" -o -name "ucl" -o -name "ddns-scripts_aliyun" -o -name "ddns-scripts_dnspod" |grep 'danshui' |xargs -i rm -rf {}
+    find . -type d -name 'luci-theme-argon' -o -name 'luci-theme-argonv3' -o -name 'luci-theme-argon-mod' -o -name 'luci-app-argon-config' -o -name 'luci-app-v2ray-server' -o -name 'luci-app-netdata' -o -name 'luci-app-samba4' | xargs -i rm -rf {}
     find . -type d -name "r8168" -o -name "r8101" -o -name "r8125" |grep 'danshui' |xargs -i rm -rf {}
+    git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon "${HOME_PATH}/feeds/luci/themes/luci-theme-argon"
+    git clone -b master https://github.com/jerrykuku/luci-theme-argon "${HOME_PATH}/feeds/luci/themes/luci-theme-argonv3"
+    git clone -b 18.06 https://github.com/jerrykuku/luci-app-argon-config "${HOME_PATH}/feeds/luci/applications/luci-app-argon-config"
+    git clone -b master https://github.com/bootli/luci-app-v2ray-server "${HOME_PATH}/feeds/luci/applications/luci-app-v2ray-serve
     if [[ ! -f "${HOME_PATH}/target/linux/ramips/mt7621/config-5.15" ]]; then
       for i in "mt7620" "mt7621" "mt76x8" "rt288x" "rt305x" "rt3883"; do \
         curl -fsSL https://raw.githubusercontent.com/lede-project/source/master/target/linux/ramips/$i/config-5.15 -o ${HOME_PATH}/target/linux/ramips/$i/config-5.15; \

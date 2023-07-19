@@ -304,7 +304,7 @@ COOLSNOWWOLF)
     git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon "${HOME_PATH}/feeds/luci/themes/luci-theme-argon"
     git clone -b master https://github.com/jerrykuku/luci-theme-argon "${HOME_PATH}/feeds/luci/themes/luci-theme-argonv3"
     git clone -b 18.06 https://github.com/jerrykuku/luci-app-argon-config "${HOME_PATH}/feeds/luci/applications/luci-app-argon-config"
-    git clone -b master https://github.com/bootli/luci-app-v2ray-server "${HOME_PATH}/feeds/luci/applications/luci-app-v2ray-serve
+    git clone -b master https://github.com/bootli/luci-app-v2ray-server "${HOME_PATH}/feeds/luci/applications/luci-app-v2ray-serve"
     if [[ ! -f "${HOME_PATH}/target/linux/ramips/mt7621/config-5.15" ]]; then
       for i in "mt7620" "mt7621" "mt76x8" "rt288x" "rt305x" "rt3883"; do \
         curl -fsSL https://raw.githubusercontent.com/lede-project/source/master/target/linux/ramips/$i/config-5.15 -o ${HOME_PATH}/target/linux/ramips/$i/config-5.15; \

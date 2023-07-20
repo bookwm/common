@@ -298,6 +298,7 @@ COOLSNOWWOLF)
   for i in ${c[@]}; do \
     find . -type d -name "${i}" |grep -v 'danshui' |xargs -i rm -rf {}; \
   done
+  if 
     find . -type d -name 'luci-theme-argon' -o -name 'luci-theme-argonv3' -o -name 'luci-theme-argon-mod' -o -name 'luci-app-argon-config' -o -name 'luci-app-v2ray-server' -o -name 'luci-app-netdata' -o -name 'luci-app-samba4' | xargs -i rm -rf {}
     find . -type d -name "r8168" -o -name "r8101" -o -name "r8125" |grep 'danshui' |xargs -i rm -rf {}
   if [[ "${GL_BRANCH}" == "lede" ]]; then

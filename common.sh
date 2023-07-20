@@ -307,6 +307,8 @@ COOLSNOWWOLF)
     git clone -b master https://github.com/jerrykuku/luci-theme-argon "${HOME_PATH}/feeds/luci/themes/luci-theme-argonv3"
     git clone -b 18.06 https://github.com/jerrykuku/luci-app-argon-config "${HOME_PATH}/feeds/luci/applications/luci-app-argon-config"
     git clone -b master https://github.com/bootli/luci-app-v2ray-server "${HOME_PATH}/feeds/luci/applications/luci-app-v2ray-server"
+    git clone -b master https://github.com/bootli/luci-app-netdata "${HOME_PATH}/feeds/luci/applications/luci-app-netdata"
+    git clone -b master https://github.com/bootli/luci-app-samba4 "${HOME_PATH}/feeds/luci/applications/luci-app-samba4"
  
     if [[ ! -f "${HOME_PATH}/target/linux/ramips/mt7621/config-5.15" ]]; then
       for i in "mt7620" "mt7621" "mt76x8" "rt288x" "rt305x" "rt3883"; do \

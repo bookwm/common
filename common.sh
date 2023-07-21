@@ -291,13 +291,13 @@ mv -f uniq.conf feeds.conf.default
 #  find . -type d -name "${x}" |grep -v 'danshui\|freifunk' |xargs -i rm -rf {}; \
 #done
 #
-case "${SOURCE_CODE}" in
-COOLSNOWWOLF)
+#case "${SOURCE_CODE}" in
+#COOLSNOWWOLF)
 #  s="luci-app-netdata,netdata,luci-app-diskman,mentohust"
 #  c=(${s//,/ })
 #  for i in ${c[@]}; do \
 #    find . -type d -name "${i}" |grep -v 'danshui' |xargs -i rm -rf {}; \
-  done
+#  done
  
 
   if [[ "${GL_BRANCH}" == "lede" ]]; then

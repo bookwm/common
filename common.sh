@@ -308,7 +308,7 @@ COOLSNOWWOLF)
     git clone -b master https://github.com/bootli/luci-app-v2ray-server "${HOME_PATH}/feeds/luci/applications/luci-app-v2ray-server"
     git clone -b master https://github.com/bootli/luci-app-netdata "${HOME_PATH}/feeds/luci/applications/luci-app-netdata"
     git clone -b master https://github.com/bootli/luci-app-samba4 "${HOME_PATH}/feeds/luci/applications/luci-app-samba4"
-    git clone -b master https://github.com/bootli/libuild "${HOME_PATH}/feeds/package/libuild"
+    git clone -b master https://github.com/bootli/libuild "${HOME_PATH}/package/libuild"
     
   if [[ ! -f "${HOME_PATH}/target/linux/ramips/mt7621/config-5.15" ]]; then
       for i in "mt7620" "mt7621" "mt76x8" "rt288x" "rt305x" "rt3883"; do \

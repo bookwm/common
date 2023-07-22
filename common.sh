@@ -773,7 +773,7 @@ if [[ "${Customized_Information}" == "0" ]] || [[ -z "${Customized_Information}"
   echo "不进行,个性签名设置"
 elif [[ -n "${Customized_Information}" ]]; then
   sed -i "s?DESCRIPTION=.*?DESCRIPTION='OpenWrt '\" >> /etc/openwrt_release?g" "${ZZZ_PATH}"
-  sed -i "s?OpenWrt ?${Customized_Information} @ OpenWrt Li [2023] Compiled by Li OpenWrt ?g" "${ZZZ_PATH}"
+  sed -i "s?OpenWrt ?${Customized_Information} OpenWrt Li [2023] Compiled by Li OpenWrt ?g" "${ZZZ_PATH}"
   echo "个性签名[${Customized_Information}]增加完成"
 fi
 

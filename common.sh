@@ -265,19 +265,19 @@ mv -f uniq.conf feeds.conf.default
 
 # 这里增加了源,要对应的删除/etc/opkg/distfeeds.conf插件源
 cat >>"feeds.conf.default" <<-EOF
-#src-git danshui1 https://github.com/281677160/openwrt-package.git;${SOURCE}
+src-git danshui1 https://github.com/281677160/openwrt-package.git;${SOURCE}
 EOF
 ./scripts/feeds update -a
 cat >>"feeds.conf.default" <<-EOF
-#src-git helloworld https://github.com/fw876/helloworld.git
-#src-git passwall3 https://github.com/xiaorouji/openwrt-passwall.git;packages
+src-git helloworld https://github.com/fw876/helloworld.git
+src-git passwall3 https://github.com/xiaorouji/openwrt-passwall.git;packages
 EOF
 
 App_path="$(find . -type d -name "applications" |grep 'luci' |sed "s?.?${HOME_PATH}?" |awk 'END {print}')"
 if [[ `find "${App_path}" -type d -name "zh_Hans" |grep -c "zh_Hans"` -gt '20' ]]; then
-  echo "#src-git danshui2 https://github.com/281677160/openwrt-package.git;Theme2" >> "feeds.conf.default"
+  echo "src-git danshui2 https://github.com/281677160/openwrt-package.git;Theme2" >> "feeds.conf.default"
 else
-  echo "#src-git danshui2 https://github.com/281677160/openwrt-package.git;Theme1" >> "feeds.conf.default"
+  echo "src-git danshui2 https://github.com/281677160/openwrt-package.git;Theme1" >> "feeds.conf.default"
 fi
 
 z="*luci-theme-argon*,*luci-app-argon-config*,*luci-theme-Butterfly*,*luci-theme-netgear*,*luci-theme-atmaterial*, \
@@ -299,18 +299,16 @@ COOLSNOWWOLF)
     find . -type d -name "${i}" |grep -v 'danshui' |xargs -i rm -rf {}; \
   done
  
-#添加
+
   if [[ "${GL_BRANCH}" == "lede" ]]; then
-    find . -type d -name 'luci-theme-argon' -o -name 'luci-theme-argonv3' -o -name 'ddns-go' -o -name 'luci-app-ddns-go' -o -name 'luci-theme-argon-mod' -o -name 'luci-app-argon-config' -o -name 'luci-theme-argone-mod' -o -name 'luci-app-argone-config' -o -name 'luci-app-v2ray-server' -o -name 'luci-app-netdata' -o -name 'autosamba' -o -name 'luci-app-samba4' -o -name 'luci-app-ikoolproxy' | xargs -i rm -rf {}
-#find . -type d -name "r8168" -o -name "r8101" -o -name "r8125" |grep 'danshui' |xargs -i rm -rf {}
-    git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon "${HOME_PATH}/package/lean/luci-theme-argon"
-    git clone -b 18.06 https://github.com/jerrykuku/luci-app-argon-config "${HOME_PATH}/package/lean/luci-app-argon-config"
-    git clone https://github.com/bootli/luci-app-v2ray-server "${HOME_PATH}/feeds/luci/applications/luci-app-v2ray-server"
-    git clone https://github.com/bootli/luci-app-samba4 "${HOME_PATH}/feeds/luci/applications/luci-app-samba4"
-    git clone https://github.com/bootli/libuild "${HOME_PATH}/package/libuild"
-    git clone https://github.com/sirpdboy/luci-app-ddns-go "${HOME_PATH}/package/ddns-go"
-    
-  if [[ ! -f "${HOME_PATH}/target/linux/ramips/mt7621/config-5.15" ]]; then
+    find . -type d -name 'luci-theme-argon' -o -name 'luci-theme-argonv3' -o -name 'luci-theme-argon-mod' -o -name 'luci-app-argon-config' -o -name 'luci-app-v2ray-server' -o -name 'luci-app-netdata' -o -name 'autosamba' -o -name 'luci-app-samba4' | xargs -i rm -rf {}
+    find . -type d -name "r8168" -o -name "r8101" -o -name "r8125" |grep 'danshui' |xargs -i rm -rf {}
+    git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon "${HOME_PATH}/feeds/luci/themes/luci-theme-argon"
+    git clone -b master https://github.com/jerrykuku/luci-theme-argon "${HOME_PATH}/feeds/luci/themes/luci-theme-argonv3"
+    git clone -b 18.06 https://github.com/jerrykuku/luci-app-argon-config "${HOME_PATH}/feeds/luci/applications/luci-app-argon-config"
+    git clone -b master https://github.com/bootli/luci-app-v2ray-server "${HOME_PATH}/feeds/luci/applications/luci-app-v2ray-server"
+ 
+    if [[ ! -f "${HOME_PATH}/target/linux/ramips/mt7621/config-5.15" ]]; then
       for i in "mt7620" "mt7621" "mt76x8" "rt288x" "rt305x" "rt3883"; do \
         curl -fsSL https://raw.githubusercontent.com/lede-project/source/master/target/linux/ramips/$i/config-5.15 -o ${HOME_PATH}/target/linux/ramips/$i/config-5.15; \
       done
@@ -368,10 +366,10 @@ esac
 ./scripts/feeds update passwall3 helloworld
 
 # 更换golang版本
-#if [[ -d "${HOME_PATH}/build/common/Share/golang" ]]; then
-#  rm -rf ${HOME_PATH}/feeds/packages/lang/golang
-#  cp -Rf ${HOME_PATH}/build/common/Share/golang ${HOME_PATH}/feeds/packages/lang/golang
-#fi
+if [[ -d "${HOME_PATH}/build/common/Share/golang" ]]; then
+  rm -rf ${HOME_PATH}/feeds/packages/lang/golang
+  cp -Rf ${HOME_PATH}/build/common/Share/golang ${HOME_PATH}/feeds/packages/lang/golang
+fi
 
 if [[ -d "${HOME_PATH}/feeds/danshui1/relevance/shadowsocks-libev" ]]; then
   rm -rf ${HOME_PATH}/feeds/packages/net/shadowsocks-libev
@@ -612,11 +610,11 @@ cd ${HOME_PATH}
 find . -type d -name '*luci-app-passwall*' -o -name 'passwall1' -o -name 'passwall2' | xargs -i rm -rf {}
 sed -i '/passwall.git\;luci/d; /passwall2/d' "feeds.conf.default"
 if [[ "${PassWall_luci_branch}" == "1" ]]; then
-  echo "#src-git passwall1 https://github.com/xiaorouji/openwrt-passwall.git;luci-smartdns-new-version" >> "feeds.conf.default"
-  echo "#src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2.git;main" >> "feeds.conf.default"
+  echo "src-git passwall1 https://github.com/xiaorouji/openwrt-passwall.git;luci-smartdns-new-version" >> "feeds.conf.default"
+  echo "src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2.git;main" >> "feeds.conf.default"
 else
-  echo "#src-git passwall1 https://github.com/xiaorouji/openwrt-passwall.git;luci" >> "feeds.conf.default"
-  echo "#src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2.git;main" >> "feeds.conf.default"
+  echo "src-git passwall1 https://github.com/xiaorouji/openwrt-passwall.git;luci" >> "feeds.conf.default"
+  echo "src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2.git;main" >> "feeds.conf.default"
 fi
 
 # openclash
@@ -774,7 +772,7 @@ if [[ "${Customized_Information}" == "0" ]] || [[ -z "${Customized_Information}"
   echo "不进行,个性签名设置"
 elif [[ -n "${Customized_Information}" ]]; then
   sed -i "s?DESCRIPTION=.*?DESCRIPTION='OpenWrt '\" >> /etc/openwrt_release?g" "${ZZZ_PATH}"
-  sed -i "s?OpenWrt ?${Customized_Information} OpenWrt Li [2023] Compiled by Li OpenWrt ?g" "${ZZZ_PATH}"
+  sed -i "s?OpenWrt ?${Customized_Information} @ OpenWrt ?g" "${ZZZ_PATH}"
   echo "个性签名[${Customized_Information}]增加完成"
 fi
 
@@ -1016,20 +1014,20 @@ mkdir -p ${HOME_PATH}/files/etc/hotplug.d/block
 cp -Rf ${HOME_PATH}/build/common/custom/10-mount ${HOME_PATH}/files/etc/hotplug.d/block/10-mount
 fi
 
-# if [[ "${Disable_autosamba}" == "1" ]]; then
-# sed -i '/luci-i18n-samba/d; /PACKAGE_samba/d; /SAMBA_MAX/d; /SAMBA4_SERVER/d' "${HOME_PATH}/.config"
-# echo '
+if [[ "${Disable_autosamba}" == "1" ]]; then
+sed -i '/luci-i18n-samba/d; /PACKAGE_samba/d; /SAMBA_MAX/d; /SAMBA4_SERVER/d' "${HOME_PATH}/.config"
+echo '
 # CONFIG_PACKAGE_autosamba is not set
 # CONFIG_PACKAGE_luci-app-samba is not set
 # CONFIG_PACKAGE_luci-app-samba4 is not set
 # CONFIG_PACKAGE_samba36-server is not set
 # CONFIG_PACKAGE_samba4-libs is not set
 # CONFIG_PACKAGE_samba4-server is not set
-# ' >> ${HOME_PATH}/.config
-# else
-# sed -i '/luci-app-samba/d; /CONFIG_PACKAGE_samba/d' "${HOME_PATH}/.config"
-# echo "CONFIG_PACKAGE_autosamba=y" >> ${HOME_PATH}/.config
-# fi
+' >> ${HOME_PATH}/.config
+else
+sed -i '/luci-app-samba/d; /CONFIG_PACKAGE_samba/d' "${HOME_PATH}/.config"
+echo "CONFIG_PACKAGE_autosamba=y" >> ${HOME_PATH}/.config
+fi
 
 cat >> "${HOME_PATH}/.config" <<-EOF
 CONFIG_PACKAGE_luci=y
@@ -1137,23 +1135,23 @@ if [[ `grep -c "CONFIG_PACKAGE_dnsmasq-full=y" ${HOME_PATH}/.config` -eq '1' ]];
     sed -i 's/CONFIG_PACKAGE_dnsmasq=y/# CONFIG_PACKAGE_dnsmasq is not set/g' ${HOME_PATH}/.config
     sed -i 's/CONFIG_PACKAGE_dnsmasq-dhcpv6=y/# CONFIG_PACKAGE_dnsmasq-dhcpv6 is not set/g' ${HOME_PATH}/.config
   fi
-#fi
-#
-#if [[ `grep -c "CONFIG_PACKAGE_luci-app-samba4=y" ${HOME_PATH}/.config` -eq '1' ]]; then
-#  if [[ `grep -c "CONFIG_PACKAGE_luci-app-samba=y" ${HOME_PATH}/.config` -eq '1' ]]; then
-#    sed -i 's/CONFIG_PACKAGE_autosamba=y/# CONFIG_PACKAGE_autosamba is not set/g' ${HOME_PATH}/.config
-#    sed -i 's/CONFIG_PACKAGE_luci-app-samba=y/# CONFIG_PACKAGE_luci-app-samba is not set/g' ${HOME_PATH}/.config
-#    sed -i 's/CONFIG_PACKAGE_luci-i18n-samba-zh-cn=y/# CONFIG_PACKAGE_luci-i18n-samba-zh-cn is not set/g' ${HOME_PATH}/.config
-#    sed -i 's/CONFIG_PACKAGE_samba36-server=y/# CONFIG_PACKAGE_samba36-server is not set/g' ${HOME_PATH}/.config
-#    echo "TIME r \"您同时选择luci-app-samba和luci-app-samba4，插件有冲突，相同功能插件只能二选一，已删除luci-app-samba\"" >>CHONGTU
-#    echo "" >>CHONGTU
-#  fi
-#elif [[ `grep -c "CONFIG_PACKAGE_samba4-server=y" ${HOME_PATH}/.config` -eq '1' ]]; then
-#  echo "# CONFIG_PACKAGE_samba4-admin is not set" >> ${HOME_PATH}/.config
-#  echo "# CONFIG_PACKAGE_samba4-client is not set" >> ${HOME_PATH}/.config
-#  echo "# CONFIG_PACKAGE_samba4-libs is not set" >> ${HOME_PATH}/.config
-#  echo "# CONFIG_PACKAGE_samba4-server is not set" >> ${HOME_PATH}/.config
-#  echo "# CONFIG_PACKAGE_samba4-utils is not set" >> ${HOME_PATH}/.config
+fi
+
+if [[ `grep -c "CONFIG_PACKAGE_luci-app-samba4=y" ${HOME_PATH}/.config` -eq '1' ]]; then
+  if [[ `grep -c "CONFIG_PACKAGE_luci-app-samba=y" ${HOME_PATH}/.config` -eq '1' ]]; then
+    sed -i 's/CONFIG_PACKAGE_autosamba=y/# CONFIG_PACKAGE_autosamba is not set/g' ${HOME_PATH}/.config
+    sed -i 's/CONFIG_PACKAGE_luci-app-samba=y/# CONFIG_PACKAGE_luci-app-samba is not set/g' ${HOME_PATH}/.config
+    sed -i 's/CONFIG_PACKAGE_luci-i18n-samba-zh-cn=y/# CONFIG_PACKAGE_luci-i18n-samba-zh-cn is not set/g' ${HOME_PATH}/.config
+    sed -i 's/CONFIG_PACKAGE_samba36-server=y/# CONFIG_PACKAGE_samba36-server is not set/g' ${HOME_PATH}/.config
+    echo "TIME r \"您同时选择luci-app-samba和luci-app-samba4，插件有冲突，相同功能插件只能二选一，已删除luci-app-samba\"" >>CHONGTU
+    echo "" >>CHONGTU
+  fi
+elif [[ `grep -c "CONFIG_PACKAGE_samba4-server=y" ${HOME_PATH}/.config` -eq '1' ]]; then
+  echo "# CONFIG_PACKAGE_samba4-admin is not set" >> ${HOME_PATH}/.config
+  echo "# CONFIG_PACKAGE_samba4-client is not set" >> ${HOME_PATH}/.config
+  echo "# CONFIG_PACKAGE_samba4-libs is not set" >> ${HOME_PATH}/.config
+  echo "# CONFIG_PACKAGE_samba4-server is not set" >> ${HOME_PATH}/.config
+  echo "# CONFIG_PACKAGE_samba4-utils is not set" >> ${HOME_PATH}/.config
 fi
 
 if [[ `grep -c "CONFIG_PACKAGE_luci-app-dockerman=y" ${HOME_PATH}/.config` -eq '0' ]] || [[ `grep -c "CONFIG_PACKAGE_luci-app-docker=y" ${HOME_PATH}/.config` -eq '0' ]]; then

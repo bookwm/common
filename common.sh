@@ -299,14 +299,17 @@ COOLSNOWWOLF)
     find . -type d -name "${i}" |grep -v 'danshui' |xargs -i rm -rf {}; \
   done
  
+#添加
 
   if [[ "${GL_BRANCH}" == "lede" ]]; then
-    find . -type d -name 'luci-theme-argon' -o -name 'luci-theme-argonv3' -o -name 'luci-theme-argon-mod' -o -name 'luci-app-argon-config' -o -name 'luci-app-v2ray-server' -o -name 'luci-app-netdata' -o -name 'autosamba' -o -name 'luci-app-samba4' | xargs -i rm -rf {}
-    find . -type d -name "r8168" -o -name "r8101" -o -name "r8125" |grep 'danshui' |xargs -i rm -rf {}
-    git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon "${HOME_PATH}/feeds/luci/themes/luci-theme-argon"
-    git clone -b master https://github.com/jerrykuku/luci-theme-argon "${HOME_PATH}/feeds/luci/themes/luci-theme-argonv3"
-    git clone -b 18.06 https://github.com/jerrykuku/luci-app-argon-config "${HOME_PATH}/feeds/luci/applications/luci-app-argon-config"
-    git clone -b master https://github.com/bootli/luci-app-v2ray-server "${HOME_PATH}/feeds/luci/applications/luci-app-v2ray-server"
+    find . -type d -name 'luci-theme-argon' -o -name 'luci-theme-argonv3' -o -name 'ddns-go' -o -name 'luci-app-ddns-go' -o -name 'luci-theme-argon-mod' -o -name 'luci-app-argon-config' -o -name 'luci-theme-argone-mod' -o -name 'luci-app-argone-config' -o -name 'luci-app-v2ray-server' -o -name 'luci-app-netdata' -o -name 'autosamba' -o -name 'luci-app-samba4' -o -name 'luci-app-ikoolproxy' | xargs -i rm -rf {}
+#find . -type d -name "r8168" -o -name "r8101" -o -name "r8125" |grep 'danshui' |xargs -i rm -rf {}
+    git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon "${HOME_PATH}/package/lean/luci-theme-argon"
+    git clone -b 18.06 https://github.com/jerrykuku/luci-app-argon-config "${HOME_PATH}/package/lean/luci-app-argon-config"
+    git clone https://github.com/bootli/luci-app-v2ray-server "${HOME_PATH}/feeds/luci/applications/luci-app-v2ray-server"
+    git clone https://github.com/bootli/luci-app-samba4 "${HOME_PATH}/feeds/luci/applications/luci-app-samba4"
+    git clone https://github.com/bootli/libuild "${HOME_PATH}/package/libuild"
+    git clone https://github.com/sirpdboy/luci-app-ddns-go "${HOME_PATH}/package/ddns-go"
  
     if [[ ! -f "${HOME_PATH}/target/linux/ramips/mt7621/config-5.15" ]]; then
       for i in "mt7620" "mt7621" "mt76x8" "rt288x" "rt305x" "rt3883"; do \
@@ -366,10 +369,10 @@ esac
 ./scripts/feeds update passwall3 helloworld
 
 # 更换golang版本
-if [[ -d "${HOME_PATH}/build/common/Share/golang" ]]; then
-  rm -rf ${HOME_PATH}/feeds/packages/lang/golang
-  cp -Rf ${HOME_PATH}/build/common/Share/golang ${HOME_PATH}/feeds/packages/lang/golang
-fi
+#if [[ -d "${HOME_PATH}/build/common/Share/golang" ]]; then
+#  rm -rf ${HOME_PATH}/feeds/packages/lang/golang
+#  cp -Rf ${HOME_PATH}/build/common/Share/golang ${HOME_PATH}/feeds/packages/lang/golang
+#fi
 
 if [[ -d "${HOME_PATH}/feeds/danshui1/relevance/shadowsocks-libev" ]]; then
   rm -rf ${HOME_PATH}/feeds/packages/net/shadowsocks-libev

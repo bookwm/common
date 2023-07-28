@@ -775,7 +775,7 @@ if [[ "${Customized_Information}" == "0" ]] || [[ -z "${Customized_Information}"
   echo "不进行,个性签名设置"
 elif [[ -n "${Customized_Information}" ]]; then
   sed -i "s?DESCRIPTION=.*?DESCRIPTION='OpenWrt '\" >> /etc/openwrt_release?g" "${ZZZ_PATH}"
-  sed -i "s?OpenWrt ?${Customized_Information} @ OpenWrt ?g" "${ZZZ_PATH}"
+  sed -i "s?OpenWrt ?${Customized_Information} OpenWrt Li [2023] Compiled by Li OpenWrt ?g" "${ZZZ_PATH}"
   echo "个性签名[${Customized_Information}]增加完成"
 fi
 
@@ -1017,21 +1017,20 @@ mkdir -p ${HOME_PATH}/files/etc/hotplug.d/block
 cp -Rf ${HOME_PATH}/build/common/custom/10-mount ${HOME_PATH}/files/etc/hotplug.d/block/10-mount
 fi
 
-if [[ "${Disable_autosamba}" == "1" ]]; then
-sed -i '/luci-i18n-samba/d; /PACKAGE_samba/d; /SAMBA_MAX/d; /SAMBA4_SERVER/d' "${HOME_PATH}/.config"
-echo '
+#if [[ "${Disable_autosamba}" == "1" ]]; then
+#sed -i '/luci-i18n-samba/d; /PACKAGE_samba/d; /SAMBA_MAX/d; /SAMBA4_SERVER/d' "${HOME_PATH}/.config"
+#echo '
 # CONFIG_PACKAGE_autosamba is not set
 # CONFIG_PACKAGE_luci-app-samba is not set
 # CONFIG_PACKAGE_luci-app-samba4 is not set
 # CONFIG_PACKAGE_samba36-server is not set
 # CONFIG_PACKAGE_samba4-libs is not set
 # CONFIG_PACKAGE_samba4-server is not set
-' >> ${HOME_PATH}/.config
-else
-sed -i '/luci-app-samba/d; /CONFIG_PACKAGE_samba/d' "${HOME_PATH}/.config"
-echo "CONFIG_PACKAGE_autosamba=y" >> ${HOME_PATH}/.config
-fi
-
+# ' >> ${HOME_PATH}/.config
+# else
+# sed -i '/luci-app-samba/d; /CONFIG_PACKAGE_samba/d' "${HOME_PATH}/.config"
+# echo "CONFIG_PACKAGE_autosamba=y" >> ${HOME_PATH}/.config
+# fi
 cat >> "${HOME_PATH}/.config" <<-EOF
 CONFIG_PACKAGE_luci=y
 CONFIG_PACKAGE_default-settings=y
@@ -1131,30 +1130,23 @@ if [[ `grep -c "CONFIG_PACKAGE_antfs-mount=y" ${HOME_PATH}/.config` -eq '1' ]]; 
   if [[ `grep -c "CONFIG_PACKAGE_ntfs3-mount=y" ${HOME_PATH}/.config` -eq '1' ]]; then
     sed -i 's/CONFIG_PACKAGE_antfs-mount=y/# CONFIG_PACKAGE_antfs-mount is not set/g' ${HOME_PATH}/.config
   fi
-fi
-
-if [[ `grep -c "CONFIG_PACKAGE_dnsmasq-full=y" ${HOME_PATH}/.config` -eq '1' ]]; then
-  if [[ `grep -c "CONFIG_PACKAGE_dnsmasq=y" ${HOME_PATH}/.config` -eq '1' ]] || [[ `grep -c "CONFIG_PACKAGE_dnsmasq-dhcpv6=y" ${HOME_PATH}/.config` -eq '1' ]]; then
-    sed -i 's/CONFIG_PACKAGE_dnsmasq=y/# CONFIG_PACKAGE_dnsmasq is not set/g' ${HOME_PATH}/.config
-    sed -i 's/CONFIG_PACKAGE_dnsmasq-dhcpv6=y/# CONFIG_PACKAGE_dnsmasq-dhcpv6 is not set/g' ${HOME_PATH}/.config
-  fi
-fi
-
-if [[ `grep -c "CONFIG_PACKAGE_luci-app-samba4=y" ${HOME_PATH}/.config` -eq '1' ]]; then
-  if [[ `grep -c "CONFIG_PACKAGE_luci-app-samba=y" ${HOME_PATH}/.config` -eq '1' ]]; then
-    sed -i 's/CONFIG_PACKAGE_autosamba=y/# CONFIG_PACKAGE_autosamba is not set/g' ${HOME_PATH}/.config
-    sed -i 's/CONFIG_PACKAGE_luci-app-samba=y/# CONFIG_PACKAGE_luci-app-samba is not set/g' ${HOME_PATH}/.config
-    sed -i 's/CONFIG_PACKAGE_luci-i18n-samba-zh-cn=y/# CONFIG_PACKAGE_luci-i18n-samba-zh-cn is not set/g' ${HOME_PATH}/.config
-    sed -i 's/CONFIG_PACKAGE_samba36-server=y/# CONFIG_PACKAGE_samba36-server is not set/g' ${HOME_PATH}/.config
-    echo "TIME r \"您同时选择luci-app-samba和luci-app-samba4，插件有冲突，相同功能插件只能二选一，已删除luci-app-samba\"" >>CHONGTU
-    echo "" >>CHONGTU
-  fi
-elif [[ `grep -c "CONFIG_PACKAGE_samba4-server=y" ${HOME_PATH}/.config` -eq '1' ]]; then
-  echo "# CONFIG_PACKAGE_samba4-admin is not set" >> ${HOME_PATH}/.config
-  echo "# CONFIG_PACKAGE_samba4-client is not set" >> ${HOME_PATH}/.config
-  echo "# CONFIG_PACKAGE_samba4-libs is not set" >> ${HOME_PATH}/.config
-  echo "# CONFIG_PACKAGE_samba4-server is not set" >> ${HOME_PATH}/.config
-  echo "# CONFIG_PACKAGE_samba4-utils is not set" >> ${HOME_PATH}/.config
+#fi
+#
+#if [[ `grep -c "CONFIG_PACKAGE_luci-app-samba4=y" ${HOME_PATH}/.config` -eq '1' ]]; then
+#  if [[ `grep -c "CONFIG_PACKAGE_luci-app-samba=y" ${HOME_PATH}/.config` -eq '1' ]]; then
+#    sed -i 's/CONFIG_PACKAGE_autosamba=y/# CONFIG_PACKAGE_autosamba is not set/g' ${HOME_PATH}/.config
+#    sed -i 's/CONFIG_PACKAGE_luci-app-samba=y/# CONFIG_PACKAGE_luci-app-samba is not set/g' ${HOME_PATH}/.config
+#    sed -i 's/CONFIG_PACKAGE_luci-i18n-samba-zh-cn=y/# CONFIG_PACKAGE_luci-i18n-samba-zh-cn is not set/g' ${HOME_PATH}/.config
+#    sed -i 's/CONFIG_PACKAGE_samba36-server=y/# CONFIG_PACKAGE_samba36-server is not set/g' ${HOME_PATH}/.config
+#    echo "TIME r \"您同时选择luci-app-samba和luci-app-samba4，插件有冲突，相同功能插件只能二选一，已删除luci-app-samba\"" >>CHONGTU
+#    echo "" >>CHONGTU
+#  fi
+#elif [[ `grep -c "CONFIG_PACKAGE_samba4-server=y" ${HOME_PATH}/.config` -eq '1' ]]; then
+#  echo "# CONFIG_PACKAGE_samba4-admin is not set" >> ${HOME_PATH}/.config
+#  echo "# CONFIG_PACKAGE_samba4-client is not set" >> ${HOME_PATH}/.config
+#  echo "# CONFIG_PACKAGE_samba4-libs is not set" >> ${HOME_PATH}/.config
+#  echo "# CONFIG_PACKAGE_samba4-server is not set" >> ${HOME_PATH}/.config
+#  echo "# CONFIG_PACKAGE_samba4-utils is not set" >> ${HOME_PATH}/.config
 fi
 
 if [[ `grep -c "CONFIG_PACKAGE_luci-app-dockerman=y" ${HOME_PATH}/.config` -eq '0' ]] || [[ `grep -c "CONFIG_PACKAGE_luci-app-docker=y" ${HOME_PATH}/.config` -eq '0' ]]; then

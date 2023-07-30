@@ -1,6 +1,6 @@
 #!/bin/bash
 # https://github.com/bootli/build-actions
-# common Module by 28677160
+# common Module by 
 # matrix.target=${FOLDER_NAME}
 
 ACTIONS_VERSION="1.0.3"
